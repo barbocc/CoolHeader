@@ -5,7 +5,7 @@
  * Core plugin's class
  * @author     Andrey Stolarchuk <barbocc@gmail.com>
  */
-class Class_Cool_Header {
+class Cool_Header {
 	
 	/**
 	 * @var The loader that's responsible for maintaining and registering all hooks that power
@@ -20,12 +20,12 @@ class Class_Cool_Header {
 	private function load_dependencies(){
 		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cool-header-loader.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cool-header-frontend.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cool-header-backend.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'frontend/class-cool-header-frontend.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'backend/class-cool-header-backend.php';
 		
 	}
 	
-	private function __construct() {
+	public function __construct() {
 		
 		$this->plugin_name = 'cool-header';
 		$this->version = '1.0.0';
@@ -39,7 +39,7 @@ class Class_Cool_Header {
 	
 	private function define_admin_hooks() {
 		
-		$plugin_admin = new Online_Community_Backend( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Cool_Header_Backend( $this->get_plugin_name(), $this->get_version() );
 		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
