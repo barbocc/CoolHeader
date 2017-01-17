@@ -19,9 +19,9 @@ class Cool_Header {
 	
 	private function load_dependencies(){
 		
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cool-header-loader.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'frontend/class-cool-header-frontend.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'backend/class-cool-header-backend.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-cool-header-loader.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/class-cool-header-frontend.php';
+		require_once plugin_dir_path( __FILE__ ) . 'backend/class-cool-header-backend.php';
 		
 	}
 	
@@ -74,7 +74,7 @@ class Cool_Header {
 	
 	private function set_locale() {
 		
-		$plugin_i18n = new Online_Community_i18n();
+		$plugin_i18n = new Cool_Header_i18n();
 		
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 		
