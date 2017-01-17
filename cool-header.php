@@ -41,6 +41,8 @@ function run_cool_header() {
 	
 	$plugin = new Cool_Header();
 	$plugin->run();
+	return $plugin;
 	
 }
-run_cool_header();
+
+$cool_header_plugin = run_cool_header();
