@@ -20,6 +20,7 @@ class Cool_Header {
 	private function load_dependencies(){
 		
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-cool-header-loader.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-cool-header-i18n.php';
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/class-cool-header-frontend.php';
 		require_once plugin_dir_path( __FILE__ ) . 'backend/class-cool-header-backend.php';
 		
