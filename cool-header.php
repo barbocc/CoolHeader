@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require plugin_dir_path( __FILE__ ) . '/class-cool-header.php';
+require plugin_dir_path( __FILE__ ) . 'class-cool-header.php';
 
 register_activation_hook( __FILE__, 'activate_cool_header' );
 register_deactivation_hook( __FILE__, 'deactivate_cool_header' );
@@ -26,6 +26,7 @@ function activate_cool_header() {
 	Online_Community_Activator::activate();
 	*/
 }
+
 
 /**
  * The code that runs during plugin deactivation.
