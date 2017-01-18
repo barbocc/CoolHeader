@@ -39,14 +39,53 @@ class Cool_Header_Backend {
 		);
 	}
 	
+	public function register_plugin_options(){
+	    
+		register_setting(
+			'cool_header_options',                 // Option group
+			'cool_header_options',                 // Option name
+            array($this,'sanitize_main_options')
+		);
+    }
+
+    public function sanitize_main_options($input){
+	    //var_dump($_POST);
+	    //var_dump($input);
+	    //$input['block_id'] = '123';
+        return $input;
+    }
+    
+	
 	public function display_options_page(){
+        
+        //Fix of wordpress bug
+       if (isset($_POST["cool_header_options"])){
+           $validated = $this->sanitize_main_options($_POST["cool_header_options"]);
+           update_option('cool_header_options', $validated);
+       }
 		?>
+
+        <form method="post" action="<?php admin_url(''); ?>">
+        <?php //settings_fields( 'cool_header_options' ); ?>
+        <?php //do_settings_sections( 'cool_header_options' );
+
+        $options = get_option('cool_header_options');
+        ?>
 		<h1>Настройка плагина Cool Header</h1>
-		<label for="block_id">ID блока</label>
-		<input type="text" name="block_id"/>
-		<label for="scroll_dept">Глубина скроллинга от блока</label>
-		<input type="text" name="scroll_depth">
-		<button type="submit">Сохранить</button>
+		<div>
+            <label for="cool_header_options[block_id]">ID блока
+		        <p><input type="text" name="cool_header_options[block_id]" value="<?=$options['block_id']?>"/></p>
+                <p class="description">ID при скроллине от которого появится всплывающий блок</p>
+            </label>
+        </div>
+        <div>
+            <label for="cool_header_options[scroll_depth]">Глубина скроллинга от блока
+                <p><input type="text" name="cool_header_options[scroll_depth]" value="<?=$options['scroll_depth']?>"></p>
+                <p class="description">На какой глубине появляется этот </p>
+            </label>
+        </div>
+	        <?php submit_button(); ?>
+        </form>
 <?php
 	}
 

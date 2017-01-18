@@ -26,8 +26,6 @@ function activate_cool_header() {
 	Online_Community_Activator::activate();
 	*/
 	
-	$roles = get_editable_roles();
-	var_dump($roles);
 }
 
 
