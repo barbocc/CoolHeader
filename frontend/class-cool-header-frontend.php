@@ -26,4 +26,26 @@ class Cool_Header_Frontend {
 		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/lib.js', array( 'jquery' ), $this->version, false );
 	}
 	
+	public function show_fading_script(){
+		$settings = get_option('cool_header_options');
+		
+		$html = '';
+		
+		if ($settings['block_id'] && $settings['block_id']!== '') {
+			?>
+			<script type="application/javascript">
+				alert('xxx');
+                
+			</script>
+			<?php
+		}
+	}
+	
+	public function show_html_block(){
+		?>
+		<div>SSSSS</div>
+		
+		<?php
+	}
+	
 }

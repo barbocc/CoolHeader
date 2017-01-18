@@ -81,7 +81,7 @@ class Cool_Header_Backend {
         <div>
             <label for="cool_header_options[scroll_depth]">Глубина скроллинга от блока
                 <p><input type="text" name="cool_header_options[scroll_depth]" value="<?=$options['scroll_depth']?>"></p>
-                <p class="description">На какой глубине появляется этот </p>
+                <p class="description">На какой глубине появляется блок</p>
             </label>
         </div>
 	        <?php submit_button(); ?>
