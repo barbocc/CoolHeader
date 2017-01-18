@@ -31,10 +31,27 @@ class Cool_Header_Frontend {
 		
 		$html = '';
 		
-		if ($settings['block_id'] && $settings['block_id']!== '') {
+		if ($settings['block_id'] && $settings['block_id']!== '' && $settings['scroll_depth'] && $settings['scroll_depth']!== '') {
 			?>
 			<script type="application/javascript">
-				alert('xxx');
+				
+				jQuery( document ).ready(function() {
+                    $(function() {
+                        jQuery(document).on("mousewheel", function() {
+                            var depth = jQuery(document).scrollTop();
+                            
+                            if (depth > <?=$settings['scroll_depth']?>) {
+                                jQuery('#cool_header_block').css('display', 'block');
+                            }
+                            else if (depth < <?=$settings['scroll_depth']?>) {
+                                jQuery('#cool_header_block').css('display', 'none');
+                            }
+                            var padding = jQuery('#wpadminbar').css('height');
+                            jQuery('#cool_header_block').css('top', padding);
+                        });
+                    });
+					
+                });
                 
 			</script>
 			<?php
@@ -43,7 +60,17 @@ class Cool_Header_Frontend {
 	
 	public function show_html_block(){
 		?>
-		<div>SSSSS</div>
+		<div id="cool_header_block" style = "
+		position: fixed; top: 0px; left: 0px;
+		width: 100%;
+		height: 50px;
+		background: #fff;
+		z-index: 1000;
+		display: none;
+		">
+			<div style="margin: 0 auto;"></div>
+			
+		</div>
 		
 		<?php
 	}

@@ -58,7 +58,7 @@ class Cool_Header {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'show_fading_script', 1 );
+		$this->loader->add_action( 'wp_footer', $plugin_public, 'show_fading_script');
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'show_html_block' );
 		
 	}
