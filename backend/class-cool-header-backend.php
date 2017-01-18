@@ -40,7 +40,14 @@ class Cool_Header_Backend {
 	}
 	
 	public function display_options_page(){
-		echo 'hello';
+		?>
+		<h1>Настройка плагина Cool Header</h1>
+		<label for="block_id">ID блока</label>
+		<input type="text" name="block_id"/>
+		<label for="scroll_dept">Глубина скроллинга от блока</label>
+		<input type="text" name="scroll_depth">
+		<button type="submit">Сохранить</button>
+<?php
 	}
 
 }

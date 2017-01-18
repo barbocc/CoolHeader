@@ -25,6 +25,9 @@ function activate_cool_header() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-online-community-activator.php';
 	Online_Community_Activator::activate();
 	*/
+	
+	$roles = get_editable_roles();
+	var_dump($roles);
 }
 
 

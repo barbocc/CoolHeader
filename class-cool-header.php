@@ -8,7 +8,7 @@
 class Cool_Header {
 	
 	/**
-	 * @var The loader that's responsible for maintaining and registering all hooks that power
+	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 */
 	protected $loader;
@@ -37,8 +37,6 @@ class Cool_Header {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		
-		
 		
 	}
 	
