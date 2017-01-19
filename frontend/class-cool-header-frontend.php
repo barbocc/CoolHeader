@@ -19,7 +19,7 @@ class Cool_Header_Frontend {
 	}
 	
 	public function enqueue_styles(){
-		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css', array(), $this->version, 'all' );
 	}
 	
 	public function enqueue_scripts(){
@@ -60,16 +60,44 @@ class Cool_Header_Frontend {
 	
 	public function show_html_block(){
 		?>
-		<div id="cool_header_block" style = "
-		position: fixed; top: 0px; left: 0px;
-		width: 100%;
-		height: 50px;
-		background: #fff;
-		z-index: 1000;
-		display: none;
-		">
-			<div style="margin: 0 auto;"></div>
-			
+		<div id="cool_header_block">
+			<div id="cool_header_block_content">
+                <div id="header-logo"><!-- Левый блок -->
+                    <a href="/">
+                        <img src="http://obustroeno.com/wp-content/themes/1brus_mag/img/min_logo.svg" style="width: 100px;">
+                    </a>
+                </div>
+                <?php
+		            if ( class_exists( 'toc_widget' ) ) {
+		                $toc = new toc_widget();
+		                ?>
+                        <div class="cool-header-toc">
+                            <div class="cool-header-show-hide">
+                                Содержание
+                            </div>
+                            <div class="cool-header-toc-elmnts" style="display: none;">
+                        <?php
+			            $toc->widget();
+			           ?>
+                            </div>
+		                </div>
+	                        <?php
+                    }
+                ?>
+                <div class="question">
+		<?php if (is_user_logged_in()){
+			echo ' <a class="bbp-topic-reply-link" style="font-family:sans-serif;" rel="nofollow" href="http://obustroeno.com/vopros">Задать вопрос</a>';
+		}
+		
+		else {
+			echo ' <a class="bbp-topic-reply-link bbp_ask_no" style="font-family:sans-serif;" href="javascript:void(null);" rel="nofollow">Задать вопрос</a>';
+		}
+		?>
+                </div>
+                <div class="cool-header-up">
+                    <a href="#" id="cool_header_up">&uarr;</a>
+                </div>
+            </div>
 		</div>
 		
 		<?php

@@ -1,0 +1,25 @@
+#cool_header_block{
+    position: fixed; top: 0px; left: 0px;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    z-index: 1000;
+    display: none;
+}
+
+#cool_header_block_content{
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.cool-header-toc{
+
+}
+
+.cool-header-show-hide{
+
+}
+
+.cool-header-toc-elmnts{
+
+}
