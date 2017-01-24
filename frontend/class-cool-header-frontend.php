@@ -7,100 +7,186 @@
  */
 
 class Cool_Header_Frontend {
-	
-	private $plugin_name;
-	private $version;
-	
-	public function __construct( $plugin_name, $version ) {
-		
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-		
-	}
-	
-	public function enqueue_styles(){
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css', array(), $this->version, 'all' );
-	}
-	
-	public function enqueue_scripts(){
-		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/lib.js', array( 'jquery' ), $this->version, false );
-	}
-	
-	public function show_fading_script(){
-		$settings = get_option('cool_header_options');
-		
-		$html = '';
-		
-		if ($settings['block_id'] && $settings['block_id']!== '' && $settings['scroll_depth'] && $settings['scroll_depth']!== '') {
-			?>
-			<script type="application/javascript">
-				
-				jQuery( document ).ready(function() {
+    
+    private $plugin_name;
+    private $version;
+    
+    public function __construct( $plugin_name, $version ) {
+        
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
+        
+    }
+    
+    public function enqueue_styles(){
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?95', array(), $this->version, 'all' );
+    }
+    
+    public function enqueue_scripts(){
+        //wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/lib.js', array( 'jquery' ), $this->version, false );
+    }
+    
+    public function show_fading_script(){
+        
+        $settings = get_option('cool_header_options');
+        $html = '';
+        
+        if ($settings['block_id'] && $settings['block_id']!== '' && $settings['scroll_depth'] && $settings['scroll_depth']!== '') {
+            ?>
+            <script type="application/javascript">
+                jQuery( document ).ready(function() {
                     $(function() {
-                        jQuery(document).on("mousewheel", function() {
+                        jQuery(document).on("scroll", function(e) {
                             var depth = jQuery(document).scrollTop();
-                            
+
                             if (depth > <?=$settings['scroll_depth']?>) {
                                 jQuery('#cool_header_block').css('display', 'block');
                             }
                             else if (depth < <?=$settings['scroll_depth']?>) {
                                 jQuery('#cool_header_block').css('display', 'none');
+                                jQuery('.cool-header-toc-elmnts').removeClass('active');
+                                jQuery('.cool-header-toc-elmnts').css('display', 'none');
+
                             }
                             var padding = jQuery('#wpadminbar').css('height');
                             jQuery('#cool_header_block').css('top', padding);
                         });
+
+                        jQuery(document).on("scroll", onScroll);
+
+                        //smoothscroll
+                        jQuery('.cool-header-toc-elmnts a[href^="#"]').on('click', function (e) {
+                            e.preventDefault();
+                            jQuery(document).off("scroll");
+
+                            jQuery('.cool-header-toc-elmnts ul li a').each(function () {
+                                jQuery(this).removeClass('active');
+                            });
+                            
+                            jQuery(this).addClass('active');
+                            var target = this.hash,
+                                menu = target;
+                            target = jQuery(target);
+                            /*$('html, body').stop().animate({
+                             'scrollTop': $target.offset().top+2
+                             }, 500, 'swing', function () {*/
+                            window.location.hash = target.selector;
+                            jQuery(document).on("scroll", onScroll);
+                            //});
+                        });
+
+                        function onScroll(event){
+                            var scrollPos = jQuery(document).scrollTop();
+                            jQuery('.cool-header-toc-elmnts ul li a').each(function () {
+                                var currLink = jQuery(this);
+                                var refElement = jQuery(currLink.attr("href"));
+                                if (refElement.position().top <= scrollPos && (refElement.position().top + refElement.height() > scrollPos)) {
+                                    jQuery('.cool-header-toc-elmnts ul li a').removeClass("active");
+                                    currLink.addClass("active");
+                                    console.log('arc active');
+                                }
+                                /*else{
+                                    currLink.removeClass("active");
+                                }*/
+                            });
+                        }
+
+
                     });
-					
+                    jQuery('#cool_header_up').on("click", function() {
+                        jQuery('#cool_header_block').css('display', 'none');
+                    });
+
+                    //
+                    jQuery(document).on("click", function(e) {
+                        var container = jQuery("#cool-header-shbutton");
+                        if (!container.is(e.target) // if the target of the click isn't the container...
+                            && container.has(e.target).length === 0) // ... nor a descendant of the container
+                        {
+                            if (jQuery('.cool-header-toc-elmnts').hasClass('active')) {
+                                console.log('remove active');
+                                jQuery('.cool-header-toc-elmnts').removeClass('active');
+                                jQuery('.cool-header-toc-elmnts').css('display', 'none');
+                            }
+                        }
+                    });
+
+                    jQuery('#cool-header-shbutton').on("click", function() {
+                        jQuery('.cool-header-toc-elmnts').toggle();
+
+                        if (jQuery('.cool-header-toc-elmnts').hasClass('active')){
+                            jQuery('.cool-header-toc-elmnts').removeClass('active');
+                            console.log('remove active');
+                        }
+                        else{
+                            console.log('add active');
+                            jQuery('.cool-header-toc-elmnts').addClass('active');
+                        }
+                    });
                 });
-                
-			</script>
-			<?php
-		}
-	}
-	
-	public function show_html_block(){
-		?>
-		<div id="cool_header_block">
-			<div id="cool_header_block_content">
-                <div id="header-logo"><!-- Левый блок -->
+            </script>
+            <?php
+        }
+    }
+    
+    public function show_html_block(){
+        ?>
+        <div id="cool_header_block">
+            <div id="cool_header_block_content">
+                <div id="cool-header-logo"><!-- Левый блок -->
                     <a href="/">
-                        <img src="http://obustroeno.com/wp-content/themes/1brus_mag/img/min_logo.svg" style="width: 100px;">
+                        <img src="http://obustroeno.com/wp-content/themes/1brus_mag/img/nano_logo.svg">
                     </a>
                 </div>
                 <?php
-		            if ( class_exists( 'toc_widget' ) ) {
-		                $toc = new toc_widget();
-		                ?>
+                    if ( class_exists( 'toc_widget' ) ) {
+                        $toc = new toc_widget();
+                        ?>
                         <div class="cool-header-toc">
                             <div class="cool-header-show-hide">
-                                Содержание
+                                <a href="javascript:void(null);" rel="nofollow" id="cool-header-shbutton">
+                                    <div id="cool-header-text-toc">Содержание</div>
+                                    <div id="cool-header-arrow">
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </div>
+                                </a>
                             </div>
                             <div class="cool-header-toc-elmnts" style="display: none;">
                         <?php
-			            $toc->widget();
-			           ?>
+                        $toc->widget();
+                       ?>
                             </div>
-		                </div>
-	                        <?php
+                       </div>
+                            <?php
                     }
                 ?>
-                <div class="question">
-		<?php if (is_user_logged_in()){
-			echo ' <a class="bbp-topic-reply-link" style="font-family:sans-serif;" rel="nofollow" href="http://obustroeno.com/vopros">Задать вопрос</a>';
-		}
-		
-		else {
-			echo ' <a class="bbp-topic-reply-link bbp_ask_no" style="font-family:sans-serif;" href="javascript:void(null);" rel="nofollow">Задать вопрос</a>';
-		}
-		?>
-                </div>
                 <div class="cool-header-up">
-                    <a href="#" id="cool_header_up">&uarr;</a>
+                    <a href="#" id="cool_header_up"><i class="fa fa-arrow-up"></i></a>
                 </div>
+
+                <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                <script src="//yastatic.net/share2/share.js"></script>
+                <div style="float: right; margin-top: 17px; margin-right: 25px;" class="ya-share2" data-services="vkontakte,facebook,odnoklassniki" data-counter=""></div>
+                <?php
+                if (function_exists('post_likes_view')){
+	                post_likes_view();
+                }
+                ?>
+                <div class="cool-header-question">
+        <?php if (is_user_logged_in()){
+            echo ' <a class="cool-header-ask" rel="nofollow" href="http://obustroeno.com/vopros">задать вопрос</a>';
+        }
+        
+        else {
+            echo ' <a class="cool-header-ask bbp_ask_no" href="javascript:void(null);" rel="nofollow">задать вопрос</a>';
+        }
+        ?>
+                </div>
+                
             </div>
-		</div>
-		
-		<?php
-	}
-	
+        </div>
+        
+        <?php
+    }
+    
 }

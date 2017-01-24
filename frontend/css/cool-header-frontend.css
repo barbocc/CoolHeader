@@ -1,25 +1,206 @@
 #cool_header_block{
     position: fixed; top: 0px; left: 0px;
     width: 100%;
-    height: 50px;
-    background: #fff;
-    z-index: 1000;
+    height: 45px;
+    background: #6b6b6b;
+    z-index: 10001;
     display: none;
+    font-family:sans-serif;
+    opacity: 1.0;
 }
-
 #cool_header_block_content{
     margin: 0 auto;
     max-width: 1000px;
 }
+#cool_header_block_content>div{
+    float: left;
+}
+
+#cool_header_block_content>.cool-header-up{
+    float: right;
+}
+
+.cool-header-up>a{
+    margin-top: 0px;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 16pt;
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    height: 45px;
+    border: 0px solid #000000;
+    width: 45px;
+}
+
+.cool-header-up>a:hover{
+    background: #7f1958;
+}
+
+.ya-share2{
+    margin-top: 7px !important;
+}
+
+.ya-share2__icon{
+    width: 29px !important;
+    height: 29px !important;
+}
+.ya-share2__item{
+    margin-right: 10px !important;
+}
+.ya-share2__counter{
+    font-size: 15px !important;
+    line-height: 24px !important;
+    padding: 2px 8px !important;
+}
+
+#cool_header_block #like_post {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+#cool_header_block #like_post input {
+
+    background: #006c9e;
+    margin-left: 3px;
+    position: relative;
+    top: 2px;
+    color: #fff;
+    text-transform: uppercase;
+    font: 14px Arial;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 4px 10px 4px 16px;
+
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    height: 29px;
+}
+#cool_header_block #like_post .like_post_count{
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    height: 29px;
+    width: 29px;
+    background: #fff;
+    border: none;
+    padding-top: 6px;
+    padding-bottom: 7px;
+    margin-left: 0;
+}
+.cool-header-question>a{
+    color: #fff;
+    background: #0171a1;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-weight: bold;
+    margin-top: 1px;
+    float: left;
+    position: relative;
+    z-index: 10;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    text-transform: uppercase;
+    font: 14px Arial;
+    font-weight: bold;
+}
+
+.cool-header-question{
+    text-transform: uppercase;
+    font: 14px Arial;
+    font-weight: bold;
+}
 
 .cool-header-toc{
-
+    float: left;
+    height: 50px;
+    min-width:300px;
 }
 
 .cool-header-show-hide{
-
+    margin-top: 8px;
+    margin-left: 20px;
+    height: 29px;
+    color:#fff;
+    background: #000;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
-.cool-header-toc-elmnts{
+#cool_header_block_content>div.cool-header-question{
+    margin-top: 6px;
+    float: right;
+    margin-right: 10px;
+}
 
+.cool-header-toc-elmnts li{
+    margin-top: 10px;
+    text-decoration: underline;
+}
+.cool-header-toc-elmnts{
+    position: absolute;
+    background: #ccc;
+    top: 45px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+.cool-header-ask{
+    font-family:sans-serif;
+
+}
+#cool-header-logo{
+    margin-top: 5px;
+}
+#cool-header-logo a img{
+    height: 30px;
+    margin-top: 1px;
+    width: auto;
+}
+
+#cool-header-arrow{
+    float: right;
+    color: #fff;
+    background: #000;
+    height: 29px;
+    padding-top: 6px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-right: 5px;
+    position: relative;
+    top: -22px;
+}
+
+#cool-header-text-toc{
+    float: left;
+    padding-top: 6px;
+    padding-left: 3px;
+    width:100%;
+    font: 14px Arial;
+    font-weight: bold;
+}
+
+.cool-header-toc-elmnts ul li a.active{
+    color: #006c9e;
 }
