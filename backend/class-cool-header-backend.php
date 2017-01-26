@@ -37,6 +37,19 @@ class Cool_Header_Backend {
 				'display_options_page'
 			) //Название функции, которая отвечает за код страницы этого пункта меню.
 		);
+		
+		if (!get_option('cool_header_options') == null){
+		    
+			$settings = array(
+				'block_id' => 'toc_container',
+				'scroll_depth' => '200',
+                'scroll_comment' => null,
+                'ask_form' => null
+            );
+			
+			add_option( "cool_header_options", $settings, '', 'yes' );
+        
+		}
 	}
 	
 	public function register_plugin_options(){
@@ -75,19 +88,25 @@ class Cool_Header_Backend {
 		<div>
             <label for="cool_header_options[block_id]">ID блока
 		        <p><input type="text" name="cool_header_options[block_id]" value="<?=$options['block_id']?>"/></p>
-                <p class="description">ID при скроллине от которого появится всплывающий блок</p>
+                <p class="description">При наличии этого блока на странице появляется панелька, без #</p>
             </label>
         </div>
         <div>
-            <label for="cool_header_options[scroll_depth]">Глубина скроллинга от блока
+            <label for="cool_header_options[scroll_depth]">Глубина скроллинга от блока px
                 <p><input type="text" name="cool_header_options[scroll_depth]" value="<?=$options['scroll_depth']?>"></p>
-                <p class="description">На какой глубине появляется панелька</p>
+                <p class="description">На каком расстоянии от верха странице появляется панелька</p>
             </label>
         </div>
         <div>
             <label for="cool_header_options[scroll_comment]">ID блока коментариев
                 <p><input type="text" name="cool_header_options[scroll_comment]" value="<?=$options['scroll_comment']?>"></p>
-                <p class="description">На какой глубине появляется панелька</p>
+                <p class="description">Настройка ссылки на коментарии,  без #</p>
+            </label>
+        </div>
+        <div>
+            <label for="cool_header_options[ask_form]">ID блока задавания вопроса
+                <p><input type="text" name="cool_header_options[ask_form]" value="<?=$options['ask_form']?>"></p>
+                <p class="description">Настройка кнопки задать вопрос, без #</p>
             </label>
         </div>
         

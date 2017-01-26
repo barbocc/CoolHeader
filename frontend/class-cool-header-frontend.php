@@ -178,7 +178,7 @@ class Cool_Header_Frontend {
                            echo $str;
                            
                         $settings = get_option('cool_header_options');
-                           if ( $settings['scroll_comment']){
+                           if ( $settings['scroll_comment'] == null || $settings['scroll_comment']== ''){
                                ?>
                                <ul>
                                    <li>
@@ -206,9 +206,15 @@ class Cool_Header_Frontend {
 	                post_likes_view();
                 }
                 ?>
-                <div class="cool-header-question">
-                    <a class="cool-header-ask" rel="nofollow" href="#">задать вопрос</a>
-                </div>
+                <?php
+	                if ( $settings['ask_form'] == null || $settings['ask_form']== '') {
+                ?>
+                        <div class="cool-header-question">
+                            <a class="cool-header-ask" rel="nofollow" href="#<?= $settings['ask_form'] ?>">задать вопрос</a>
+                        </div>
+                <?php
+	                }
+                ?>
                 
             </div>
         </div>
