@@ -19,7 +19,7 @@ class Cool_Header_Frontend {
     }
     
     public function enqueue_styles(){
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?95', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?164', array(), $this->version, 'all' );
     }
     
     public function enqueue_scripts(){
@@ -34,25 +34,10 @@ class Cool_Header_Frontend {
         if ($settings['block_id'] && $settings['block_id']!== '' && $settings['scroll_depth'] && $settings['scroll_depth']!== '') {
             ?>
             <script type="application/javascript">
+                
                 jQuery( document ).ready(function() {
                     $(function() {
-                        jQuery(document).on("scroll", function(e) {
-                            var depth = jQuery(document).scrollTop();
-
-                            if (depth > <?=$settings['scroll_depth']?>) {
-                                jQuery('#cool_header_block').css('display', 'block');
-                            }
-                            else if (depth < <?=$settings['scroll_depth']?>) {
-                                jQuery('#cool_header_block').css('display', 'none');
-                                jQuery('.cool-header-toc-elmnts').removeClass('active');
-                                jQuery('.cool-header-toc-elmnts').css('display', 'none');
-
-                            }
-                            var padding = jQuery('#wpadminbar').css('height');
-                            jQuery('#cool_header_block').css('top', padding);
-                        });
-
-                        jQuery(document).on("scroll", onScroll);
+                         jQuery(document).on("scroll", onScroll);
 
                         //smoothscroll
                         jQuery('.cool-header-toc-elmnts a[href^="#"]').on('click', function (e) {
@@ -64,6 +49,7 @@ class Cool_Header_Frontend {
                             });
                             
                             jQuery(this).addClass('active');
+                            jQuery('#cool-header-text-toc').text(jQuery(this).text());
                             var target = this.hash,
                                 menu = target;
                             target = jQuery(target);
@@ -74,8 +60,25 @@ class Cool_Header_Frontend {
                             jQuery(document).on("scroll", onScroll);
                             //});
                         });
-
+                          
                         function onScroll(event){
+                            
+                            var depth = jQuery(document).scrollTop();
+
+                            if (depth > <?=$settings['scroll_depth']?>) {
+                                jQuery('#cool_header_block').css('display', 'block');
+                            }
+                            else if (depth < <?=$settings['scroll_depth']?>) {
+                                jQuery('#cool_header_block').css('display', 'none');
+                                jQuery('.cool-header-toc-elmnts').removeClass('active');
+                                jQuery('.cool-header-toc-elmnts').css('display', 'none');
+                                
+                                jQuery('#cool-header-text-toc').text("<?php global $post; echo $post->post_title;?>");
+
+                            }
+                            var padding = jQuery('#wpadminbar').css('height');
+                            jQuery('#cool_header_block').css('top', padding);
+
                             var scrollPos = jQuery(document).scrollTop();
                             jQuery('.cool-header-toc-elmnts ul li a').each(function () {
                                 var currLink = jQuery(this);
@@ -83,9 +86,10 @@ class Cool_Header_Frontend {
                                 if (refElement.position().top <= scrollPos && (refElement.position().top + refElement.height() > scrollPos)) {
                                     jQuery('.cool-header-toc-elmnts ul li a').removeClass("active");
                                     currLink.addClass("active");
+                                    jQuery('#cool-header-text-toc').text(currLink.text());
                                     console.log('arc active');
                                 }
-                                /*else{
+                                /*else (){
                                     currLink.removeClass("active");
                                 }*/
                             });
@@ -123,6 +127,8 @@ class Cool_Header_Frontend {
                             jQuery('.cool-header-toc-elmnts').addClass('active');
                         }
                     });
+                    
+                    
                 });
             </script>
             <?php
@@ -130,6 +136,20 @@ class Cool_Header_Frontend {
     }
     
     public function show_html_block(){
+      
+	    if ( !class_exists( 'toc_widget' )){
+	        return;
+	    }
+	    
+	    $toc = new toc_widget();
+	    ob_start();
+	        $toc->widget();
+	    $str = ob_get_clean();
+	    
+	    if ( !$str){
+		    return;
+	    }
+	    
         ?>
         <div id="cool_header_block">
             <div id="cool_header_block_content">
@@ -139,13 +159,14 @@ class Cool_Header_Frontend {
                     </a>
                 </div>
                 <?php
-                    if ( class_exists( 'toc_widget' ) ) {
-                        $toc = new toc_widget();
+                    //if ( class_exists( 'toc_widget' ) ) {
+	                    global $post;
+	                    
                         ?>
                         <div class="cool-header-toc">
                             <div class="cool-header-show-hide">
                                 <a href="javascript:void(null);" rel="nofollow" id="cool-header-shbutton">
-                                    <div id="cool-header-text-toc">Содержание</div>
+                                    <div id="cool-header-text-toc"><?=$post->post_title?></div>
                                     <div id="cool-header-arrow">
                                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                     </div>
@@ -153,12 +174,25 @@ class Cool_Header_Frontend {
                             </div>
                             <div class="cool-header-toc-elmnts" style="display: none;">
                         <?php
-                        $toc->widget();
+                        
+                           echo $str;
+                           
+                        $settings = get_option('cool_header_options');
+                           if ( $settings['scroll_comment']){
+                               ?>
+                               <ul>
+                                   <li>
+                                       <a href="#<?=$settings['scroll_comment']?>" style="padding-bottom: 20px;">Коментарии</a>
+                                   </li>
+                               </ul>
+                                <?
+                           }
+                        
                        ?>
                             </div>
                        </div>
                             <?php
-                    }
+                    //}
                 ?>
                 <div class="cool-header-up">
                     <a href="#" id="cool_header_up"><i class="fa fa-arrow-up"></i></a>
