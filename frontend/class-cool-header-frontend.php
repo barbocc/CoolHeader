@@ -207,14 +207,7 @@ class Cool_Header_Frontend {
                 }
                 ?>
                 <div class="cool-header-question">
-        <?php if (is_user_logged_in()){
-            echo ' <a class="cool-header-ask" rel="nofollow" href="http://obustroeno.com/vopros">задать вопрос</a>';
-        }
-        
-        else {
-            echo ' <a class="cool-header-ask bbp_ask_no" href="javascript:void(null);" rel="nofollow">задать вопрос</a>';
-        }
-        ?>
+                    <a class="cool-header-ask" rel="nofollow" href="#">задать вопрос</a>
                 </div>
                 
             </div>
