@@ -19,7 +19,7 @@ class Cool_Header_Frontend {
     }
     
     public function enqueue_styles(){
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?165', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?170', array(), $this->version, 'all' );
     }
     
     public function enqueue_scripts(){
@@ -153,11 +153,11 @@ class Cool_Header_Frontend {
         ?>
         <div id="cool_header_block">
             <div id="cool_header_block_content">
-                <div id="cool-header-logo"><!-- Левый блок -->
+                <!--<div id="cool-header-logo">
                     <a href="/">
                         <img src="http://obustroeno.com/wp-content/themes/1brus_mag/img/nano_logo.svg">
                     </a>
-                </div>
+                </div>-->
                 <?php
                     //if ( class_exists( 'toc_widget' ) ) {
 	                    global $post;
@@ -208,7 +208,7 @@ class Cool_Header_Frontend {
                 ?>
                 <div class="cool-header-question">
         <?php if (is_user_logged_in()){
-            echo ' <a class="cool-header-ask" rel="nofollow" href="#">задать вопрос</a>';
+            echo ' <a class="cool-header-ask" rel="nofollow" href="http://obustroeno.com/vopros">задать вопрос</a>';
         }
         
         else {
