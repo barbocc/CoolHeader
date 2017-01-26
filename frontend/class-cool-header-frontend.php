@@ -207,7 +207,7 @@ class Cool_Header_Frontend {
                 }
                 ?>
                 <?php
-	                if ( $settings['ask_form'] !== null || $settings['ask_form'] !== '') {
+	                if ( $settings['ask_form'] !== null && $settings['ask_form'] !== '') {
                 ?>
                         <div class="cool-header-question">
                             <a class="cool-header-ask" rel="nofollow" href="#<?= $settings['ask_form'] ?>">задать вопрос</a>
