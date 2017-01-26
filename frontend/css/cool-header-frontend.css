@@ -232,7 +232,7 @@
 
 }
 
-.cool-header-toc-elmnts>.toc_widget_list>li>a:first-child{
+.cool-header-toc-elmnts>.toc_widget_list>li:first-child>a:first-child{
     padding-top:20px;
 }
 .cool-header-toc-elmnts>.toc_widget_list>li:last-child a{
