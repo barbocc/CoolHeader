@@ -21,11 +21,10 @@ register_deactivation_hook( __FILE__, 'deactivate_cool_header' );
  * The code that runs during plugin activation.
  */
 function activate_cool_header() {
-	/*
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-online-community-activator.php';
-	Online_Community_Activator::activate();
-	*/
-	
+
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-cool-header-activator.php';
+	Cool_Header_Activator::activate();
+
 }
 
 
