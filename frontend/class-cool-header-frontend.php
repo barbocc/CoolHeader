@@ -19,7 +19,7 @@ class Cool_Header_Frontend {
     }
     
     public function enqueue_styles(){
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?170', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cool-header-frontend.css?174', array(), $this->version, 'all' );
     }
     
     public function enqueue_scripts(){
@@ -38,6 +38,15 @@ class Cool_Header_Frontend {
                 jQuery( document ).ready(function() {
                     $(function() {
                          jQuery(document).on("scroll", onScroll);
+
+                        jQuery('.cool-header-ask').on("click", function (){
+                            jQuery('#cool-header-ask-bg').show();
+                            jQuery('#cool-header-ask-form').show();
+                        });
+                        jQuery('#cool-header-ask-bg').on("click", function(){
+                            jQuery('#cool-header-ask-bg').hide();
+                            jQuery('#cool-header-ask-form').hide();
+                        });
 
                         //smoothscroll
                         jQuery('.cool-header-toc-elmnts a[href^="#"]').on('click', function (e) {
@@ -161,7 +170,9 @@ class Cool_Header_Frontend {
                 <?php
                     //if ( class_exists( 'toc_widget' ) ) {
 	                    global $post;
-	                    
+	                    /**
+                         * Список быстрой навигации по статье
+	                    */
                         ?>
                         <div class="cool-header-toc">
                             <div class="cool-header-show-hide">
@@ -176,7 +187,9 @@ class Cool_Header_Frontend {
                         <?php
                         
                            echo $str;
-                           
+                           /**
+                            * Переход к коментариям статьи
+                            */
                         $settings = get_option('cool_header_options');
                            if ( $settings['scroll_comment'] == null || $settings['scroll_comment']== ''){
                                ?>
@@ -193,10 +206,14 @@ class Cool_Header_Frontend {
                        </div>
                             <?php
                     //}
+                            /**
+                             * Кнопочки вверх и поделиться со спасибо
+                             */
                 ?>
                 <div class="cool-header-up">
                     <a href="#" id="cool_header_up"><i class="fa fa-arrow-up"></i></a>
                 </div>
+
 
                 <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                 <script src="//yastatic.net/share2/share.js"></script>
@@ -207,10 +224,13 @@ class Cool_Header_Frontend {
                 }
                 ?>
                 <?php
+                /**
+                 * Кнопка задавания вопроса
+                 */
 	                if ( $settings['ask_form'] !== null && $settings['ask_form'] !== '') {
                 ?>
                         <div class="cool-header-question">
-                            <a class="cool-header-ask" rel="nofollow" href="#<?= $settings['ask_form'] ?>">задать вопрос</a>
+                            <a class="cool-header-ask"  href="javascript:void(null);" rel="nofollow">задать вопрос</a>
                         </div>
                 <?php
 	                }
@@ -218,8 +238,26 @@ class Cool_Header_Frontend {
                 
             </div>
         </div>
+
+
         
         <?php
+        /**
+         * Всплывающая форма задавания вопроса
+         */
+        if ( $settings['ask_form'] !== null && $settings['ask_form'] !== '') {
+           $shortcode =  str_replace('\"','"',$settings['ask_form']);
+           $shortcode =  str_replace("\\'","'",$shortcode);
+            var_dump($shortcode);
+            ?>
+            <div id="cool-header-ask-bg">
+            </div>
+            <div id="cool-header-ask-form">
+                <?=do_shortcode($shortcode);?>
+            </div>
+        <?php
+        }
+
     }
     
 }

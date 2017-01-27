@@ -253,6 +253,27 @@
     background: #ffffff;
 }
 
+#cool-header-ask-bg{
+    background: rgba(0,0,0,0.59);
+    position: fixed;
+    z-index: 999998;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+#cool-header-ask-form {
+    position: fixed;
+    z-index: 999999;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 100px;
+    max-width: 400px;
+    display: none;
+}
+
 @media (max-width: 899px) {
     #like_post input {
         width: 20px !important;

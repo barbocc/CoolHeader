@@ -39,20 +39,21 @@ class Cool_Header_Backend {
 		);
 
 	}
-	
+
 	public function register_plugin_options(){
-	    
+	 /*
 		register_setting(
 			'cool_header_options',                 // Option group
-			'cool_header_options',                 // Option name
-            array($this,'sanitize_main_options')
-		);
+			'cool_header_options'//,                 // Option name
+            //array($this,'sanitize_main_options')
+		);*/
     }
 
     public function sanitize_main_options($input){
 	    //var_dump($_POST);
 	    //var_dump($input);
 	    //$input['block_id'] = '123';
+        //$validated = htmlspecialchars($input);
         return $input;
     }
     
@@ -61,8 +62,10 @@ class Cool_Header_Backend {
         
         //Fix of wordpress bug
        if (isset($_POST["cool_header_options"])){
+
            $validated = $this->sanitize_main_options($_POST["cool_header_options"]);
-           update_option('cool_header_options', $validated);
+
+           update_option('cool_header_options', $_POST["cool_header_options"]);
        }
 		?>
 
@@ -93,8 +96,8 @@ class Cool_Header_Backend {
         </div>
         <div>
             <label for="cool_header_options[ask_form]">Шоткод блока задавания вопроса
-                <p><input type="text" name="cool_header_options[ask_form]" value="<?=$options['ask_form']?>"></p>
-                <p class="description">Настройка кнопки задать вопрос настривается через вставку шоткода формы</p>
+                <p><input type="text" name="cool_header_options[ask_form]" value="<?=htmlentities($options['ask_form'])?>"></p>
+                <p class="description">Настройка кнопки задать вопрос настривается через вставку шоткода формы, сам шоткод формы настраивается через отдельный плагин, как например cf7</p>
             </label>
         </div>
         
