@@ -37,19 +37,7 @@ class Cool_Header_Backend {
 				'display_options_page'
 			) //Название функции, которая отвечает за код страницы этого пункта меню.
 		);
-		
-		if (!get_option('cool_header_options') == null){
-		    
-			$settings = array(
-				'block_id' => 'toc_container',
-				'scroll_depth' => '200',
-                'scroll_comment' => null,
-                'ask_form' => null
-            );
-			
-			add_option( "cool_header_options", $settings, '', 'yes' );
-        
-		}
+
 	}
 	
 	public function register_plugin_options(){
@@ -104,9 +92,9 @@ class Cool_Header_Backend {
             </label>
         </div>
         <div>
-            <label for="cool_header_options[ask_form]">ID блока задавания вопроса
+            <label for="cool_header_options[ask_form]">Шоткод блока задавания вопроса
                 <p><input type="text" name="cool_header_options[ask_form]" value="<?=$options['ask_form']?>"></p>
-                <p class="description">Настройка кнопки задать вопрос, без #</p>
+                <p class="description">Настройка кнопки задать вопрос настривается через вставку шоткода формы</p>
             </label>
         </div>
         
