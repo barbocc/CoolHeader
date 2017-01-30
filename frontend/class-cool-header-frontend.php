@@ -191,7 +191,7 @@ class Cool_Header_Frontend {
                             * Переход к коментариям статьи
                             */
                         $settings = get_option('cool_header_options');
-                           if ( $settings['scroll_comment'] == null || $settings['scroll_comment']== ''){
+                           if ( $settings['scroll_comment'] !== null && $settings['scroll_comment'] !== ''){
                                ?>
                                <ul>
                                    <li>
