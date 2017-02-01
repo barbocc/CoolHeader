@@ -36,7 +36,7 @@ class Cool_Header_Frontend {
             <script type="application/javascript">
                 
                 jQuery( document ).ready(function() {
-                    $(function() {
+                    jQuery(function() {
                          jQuery(document).on("scroll", onScroll);
 
                         jQuery('.cool-header-ask').on("click", function (){
