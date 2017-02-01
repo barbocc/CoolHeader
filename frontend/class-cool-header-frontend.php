@@ -248,7 +248,7 @@ class Cool_Header_Frontend {
         if ( $settings['ask_form'] !== null && $settings['ask_form'] !== '') {
            $shortcode =  str_replace('\"','"',$settings['ask_form']);
            $shortcode =  str_replace("\\'","'",$shortcode);
-            var_dump($shortcode);
+            
             ?>
             <div id="cool-header-ask-bg">
             </div>
